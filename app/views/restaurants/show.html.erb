@@ -1,8 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @restaurant %>
+<% @restaurant.reviews.each do |review| %>
+<p><%= review.content %></p>
+<%= link_to "delete review", review_path(review),
+    data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<% end %>
 
 <div>
+  <%= link_to "Chef: #{@restaurant.chef_name}", chef_restaurants_path(@restaurant)  %>
   <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
   <%= link_to "Back to restaurants", restaurants_path %>
 
